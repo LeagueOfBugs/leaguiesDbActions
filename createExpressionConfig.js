@@ -36,8 +36,8 @@ const createExpressionConfig = (tableName, model) => {
       return {
         UpdateExpression: `
       SET
-      start = :start,
-      end = :end,
+      #start = :start,
+      #end = :end,
       games = :games,
       leagueId = :leagueId,
       #name = :name,
@@ -55,6 +55,8 @@ const createExpressionConfig = (tableName, model) => {
         },
         ExpressionAttributeNames: {
           "#name": "name",
+          "#start": "start",
+          "#end": "end",
         },
       };
     case "players":
@@ -63,11 +65,11 @@ const createExpressionConfig = (tableName, model) => {
       SET
       image = :image,
       team = :team,
-      position = :position,
+      #position = :position,
       league = :league,
       #name = :name,
       agency = :agency,
-      onlineStatus = :onlineStatus,
+      onlineStatus = :onlineStatus
     `,
         ExpressionAttributeValues: {
           ":image": model.image,
@@ -80,6 +82,7 @@ const createExpressionConfig = (tableName, model) => {
         },
         ExpressionAttributeNames: {
           "#name": "name",
+          "#position": "position",
         },
       };
     case "teams":
@@ -91,9 +94,9 @@ const createExpressionConfig = (tableName, model) => {
       players = :players,
       league = :league,
       #name = :name,
-      limit = :limit,
-      record = :record,
-      active = :active,
+      #limit = :limit,
+      #record = :record,
+      active = :active
     `,
         ExpressionAttributeValues: {
           ":image": model.image,
@@ -107,9 +110,11 @@ const createExpressionConfig = (tableName, model) => {
         },
         ExpressionAttributeNames: {
           "#name": "name",
+          "#limit": "limit",
+          "#record": "record",
         },
       };
-    case "leagues":
+    case "Leagues":
       return {
         UpdateExpression: `
       SET
@@ -118,7 +123,7 @@ const createExpressionConfig = (tableName, model) => {
       teams = :teams,
       seasonId = :seasonId,
       #name = :name,
-      limit = :limit,
+      #limit = :limit
     `,
         ExpressionAttributeValues: {
           ":image": model.image,
@@ -130,6 +135,7 @@ const createExpressionConfig = (tableName, model) => {
         },
         ExpressionAttributeNames: {
           "#name": "name",
+          "#limit": "limit",
         },
       };
   }

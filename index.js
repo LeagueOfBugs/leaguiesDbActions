@@ -44,7 +44,6 @@ exports.handler = async (event, context) => {
       break;
   }
 
-
   try {
     const response = await docClient.send(command);
     return {
